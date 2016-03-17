@@ -1,0 +1,88 @@
+// out: ../css/style.css, compress: false, strictMath: true
+
+/*************************************************************************************/
+/*                       Initialisation                                              */
+/*************************************************************************************/
+
+@import url(https://fonts.googleapis.com/css?family=Itim);
+@import url(https://fonts.googleapis.com/css?family=Bree+Serif);
+
+html, body{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: 'Itim', cursive;
+  background-color: @bodyBgColor;
+}
+
+h1,h2 {
+  font-family: 'Bree Serif', serif;
+}
+
+@bodyBgColor : rgb(48, 55, 61);
+@closeColor : rgb(181, 21, 21);
+@wrapperBgColor : rgb(34, 39, 45);
+@borderColor : rgb(34, 161, 104);
+@hoverBtn : rgb(30, 140, 91);
+
+/*************************************************************************************/
+/*                       header                                                      */
+/*************************************************************************************/
+
+#header {
+  // display: flex;
+  width: 100%;
+  height: 20em;
+  background-image: url('../img/header.png');
+  background-size: cover;
+  color: white;
+  h1 {
+    margin-top: 0;
+    padding-top: 1em;
+  }
+}
+#addPost, .btn-primary {
+  background-color: @borderColor;
+  border: none;
+  padding: 0.5em;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: @hoverBtn;
+  }
+  &:visited {
+    background-color: @borderColor;
+  }
+}
+#addPost {
+  border-radius: 5px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%) translateY(8em);
+}
+#titre {
+  margin-bottom: 1em;
+}
+
+/*************************************************************************************/
+/*                       Wrapper                                                     */
+/*************************************************************************************/
+
+.post {
+  background-color: @wrapperBgColor;
+  border-left: 5px solid @borderColor;
+  margin-top: 1em ;
+  color: white;
+  p {
+    word-wrap: break-word;
+  }
+}
+.glyphicon-remove:before {
+  position: relative;
+  top : -0.4em;
+  right: -0.2em;
+}
+.glyphicon-remove:hover {
+  color: @closeColor;
+}
