@@ -13,7 +13,7 @@
    <div class="container">
      <div class="row">
        <div class="col-md-12" id="header">
-         <h1 class="text-center">Challenge Poo DE LA MUERTE </h1>
+         <h1 class="text-center"> Challenge Poo </h1>
          <button type="button" name="addPost" id="addPost" data-toggle="modal" data-target="#modal"> Ajouter un Post </button>
        </div>
      </div> <!-- .row -->
@@ -37,6 +37,7 @@
               </div> <!-- .form-group -->
           </div>
           <div class="modal-footer">
+            <button type="submit" class="btn btn-primary pull-left" id="updatePost"> Update </button>
             <button type="submit" class="btn btn-primary pull-left" id="subPost"> Ajouter </button>
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal"> Fermer </button>
           </div>

@@ -7,9 +7,10 @@ class Database
   private $HOST = HOST;
   private $USER = USER;
   private $PASS = PASS;
+  private $_TABLE = TABLE;
+
   private $_connect,$_error,$_stmt;
 
-  public $TABLE = TABLE;
 
   function __construct()
   {
@@ -25,6 +26,11 @@ class Database
     } catch (PDOException $e) {
         $this->_error = $e->getMessage();
     }
+  }
+
+  //return table method
+  public function table() {
+    return $this->_TABLE;
   }
 
   // Query method

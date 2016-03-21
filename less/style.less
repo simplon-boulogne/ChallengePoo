@@ -24,6 +24,7 @@ h1,h2 {
 @wrapperBgColor : rgb(34, 39, 45);
 @borderColor : rgb(34, 161, 104);
 @hoverBtn : rgb(30, 140, 91);
+@updatePencil : rgb(20, 164, 147);
 
 /*************************************************************************************/
 /*                       header                                                      */
@@ -32,11 +33,12 @@ h1,h2 {
 #header {
   // display: flex;
   width: 100%;
-  height: 20em;
+    height: 20em;
   background-image: url('../img/header.png');
   background-size: cover;
   color: white;
   h1 {
+    font-size: 4.5em;
     margin-top: 0;
     padding-top: 1em;
   }
@@ -59,7 +61,7 @@ h1,h2 {
   border-radius: 5px;
   position: relative;
   left: 50%;
-  transform: translateX(-50%) translateY(8em);
+  transform: translateX(-50%) translateY(5em);
 }
 #titre {
   margin-bottom: 1em;
@@ -78,11 +80,21 @@ h1,h2 {
     word-wrap: break-word;
   }
 }
-.glyphicon-remove:before {
+.glyphicon-remove:before,.glyphicon-pencil:before {
   position: relative;
-  top : -0.4em;
+  font-size: 2em;
+  top : -1.5em;
   right: -0.2em;
+}
+.glyphicon-pencil {
+  padding-right: 0.2em;
 }
 .glyphicon-remove:hover {
   color: @closeColor;
+}
+.glyphicon-pencil:hover {
+  color: @updatePencil;
+}
+#updatePost {
+  display: none;
 }
