@@ -4,4 +4,4 @@
 define("HOST","mysql:dbname=;host=;charset=utf8");
 define("USER","");
 define("PASS","");
-define ("TABLE","posts");
+define ("TABLE","");

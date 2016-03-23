@@ -1,18 +1,19 @@
 $(document).ready(function() {
 
  // submit addPost modal ( trim remove begin whitespace)
- $('#subPost').click(function( event  ) {
+ $('body').on("click", "#subPost" , function(event) {
    event.preventDefault();
    $("#titre,#postArea").css("border", "1px solid #ccc");
    var titlePost = $.trim($("#titre").val());
    var postArea = $.trim($("#postArea").val());
+
    if ( titlePost == "") {
      $("#titre").css("border" , "2px solid red");
    }
    if ( postArea == "") {
      $("#postArea").css("border" , "2px solid red");
    }
-   else {
+   if (titlePost != "" && postArea != "") {
      $.ajax({
       url: 'php/addPost.php',
       type: "POST",
@@ -26,56 +27,48 @@ $(document).ready(function() {
    }
  });
 
- // updatePost modal
+ // updatePost modal (FIX JQUERY CACHE PROBLEM)
  $('body').on( "click", ".glyphicon-pencil", function() {
    $('#modal').modal('show');
-   var titleToUplate = $(this).parents('.container').find('h2');
-   var postToUpdate = $(this).parents('.container').find('p');
-   var idPost = $(this).next(".glyphicon-remove").attr("id");
+   var titleToUpdate = $(this).parent().parent().find('h2');
+   var postToUpdate = $(this).parent().parent() .find('p');
+   var idPostUpdate = $(this).parent().find(".glyphicon-remove").attr("id");
 
-   $("#titre").val( titleToUplate.text() );
+   $("#titre").val( titleToUpdate.text() );
    $("#postArea").val( postToUpdate.text() );
    $("#updatePost").show();
    $("#subPost").hide();
 
-   $('body').on( "click", "#updatePost", function(event) {
-     event.preventDefault();
-     var titlePost = $.trim($("#titre").val());
-     var postArea = $.trim($("#postArea").val());
-     if ( titlePost == "") {
-       $("#titre").css("border" , "2px solid red");
-     }
-     if ( postArea == "") {
-       $("#postArea").css("border" , "2px solid red");
-     }
+   $("#updatePost").click( function(event) {
+     if ( idPostUpdate == null) { console.log("BUG FIX");}
      else {
-       $.ajax({
-        url: 'php/updatePost.php',
-        type: "POST",
-        dataType: "html",
-        data: { titlePost: titlePost, postArea: postArea, idPost: idPost },
-        success: function(data) {
-          $('#modal').modal('hide');
-          titleToUplate.html(titlePost);
-          postToUpdate.html(postArea);
-        }
-       });
+       event.preventDefault();
+       var titlePostUpdate = $.trim($("#titre").val());
+       var postAreaUpdate = $.trim($("#postArea").val());
+       if ( titlePostUpdate == "") {
+         $("#titre").css("border" , "2px solid red");
+       }
+       if ( postAreaUpdate == "") {
+         $("#postArea").css("border" , "2px solid red");
+       }
+       if (titlePostUpdate != "" && postAreaUpdate != "") {
+         $("#updatePost").remove();
+         $.ajax({
+          url: 'php/updatePost.php',
+          type: "POST",
+          dataType: "html",
+          data: { titlePostUpdate: titlePostUpdate, postAreaUpdate: postAreaUpdate, idPostUpdate: idPostUpdate },
+          success: function(data) {
+            $('#modal').modal('hide');
+            titleToUpdate.html(titlePostUpdate);
+            postToUpdate.html(postAreaUpdate);
+            $('.modal-footer').prepend('<button type="submit" class="btn btn-primary pull-left" id="updatePost"> Update </button>');
+          }
+         });
+       }
      }
-   });
+    });
  });
-
- // ajax addPost
- function updatePost(param1,param2) {
-   $.ajax({
-    url: 'php/updatePost.php',
-    type: "POST",
-    dataType: "html",
-    data: { titlePost: param1, postArea: param2 },
-    success: function(data) {
-      $('#modal').modal('hide');
-    }
-   });
- }
 
  // Reset modal inputs on hide
  $('.modal').on('hidden.bs.modal', function(){
